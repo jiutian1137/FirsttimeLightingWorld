@@ -509,6 +509,10 @@
     <None Include="asset_shader\volume\volume.vert">
       <Filter>asset_shader\volume</Filter>
     </None>
+    <None Include="assimp-vc142-mt.dll" />
+    <None Include="assimp-vc142-mtd.dll" />
+    <None Include="opencv_world440.dll" />
+    <None Include="opencv_world440d.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="asset_model\cloud\cloud_height.png">
@@ -529,5 +533,12 @@
     <Image Include="asset_model\cloud\cloud_weather.png">
       <Filter>asset_model\cloud</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="assimp-vc142-mt.lib" />
+    <Library Include="assimp-vc142-mtd.lib" />
+    <Library Include="glfw3.lib" />
+    <Library Include="opencv_world440.lib" />
+    <Library Include="opencv_world440d.lib" />
   </ItemGroup>
 </Project>
