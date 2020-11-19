@@ -64,6 +64,9 @@
     <Filter Include="asset_model\EzeFrance">
       <UniqueIdentifier>{1659ba43-f834-44f7-a4ac-aa0ed625c8a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="asset_result">
+      <UniqueIdentifier>{8f17bf7f-ca35-4f73-8ad5-72818fa04c10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glfw\glfw3.h">
@@ -527,6 +530,7 @@
     <None Include="asset_model\EzeFrance\Chunk2_Color.png">
       <Filter>asset_model\EzeFrance</Filter>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="asset_model\cloud\cloud_height.png">
@@ -546,6 +550,9 @@
     </Image>
     <Image Include="asset_model\cloud\cloud_weather.png">
       <Filter>asset_model\cloud</Filter>
+    </Image>
+    <Image Include="asset_result\temp.png">
+      <Filter>asset_result</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>

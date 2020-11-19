@@ -154,6 +154,7 @@
     <ClCompile Include="atmosphere\model.cc" />
     <ClCompile Include="clmagic\openglutil\GL\glew.c" />
     <ClCompile Include="main.cpp" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="asset_shader\volume\shadow.frag.h" />
@@ -313,6 +314,7 @@
     <Image Include="asset_model\cloud\cloud_detail.png" />
     <Image Include="asset_model\cloud\cloud_height.png" />
     <Image Include="asset_model\cloud\cloud_weather.png" />
+    <Image Include="asset_result\temp.png" />
     <None Include="asset_model\EzeFrance\Chunk0_Color.png" />
     <None Include="asset_model\EzeFrance\Chunk1_Color.png" />
     <None Include="asset_model\EzeFrance\Chunk2_Color.png" />
