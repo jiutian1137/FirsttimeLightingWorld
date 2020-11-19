@@ -1,0 +1,60 @@
+<html>
+<head>
+    <style>
+        .n1-ray {
+            stroke: white;
+            stroke-width: 15px;
+            stroke-linecap: round;
+        }
+        
+        .n2-ray {
+            stroke: white;
+            stroke-width: 10px;
+        }
+    </style>
+</head>
+
+<body style="text-align: center">
+    <svg width="90%" height="1000px">
+        <linearGradient id="substance" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="rgb(233,233,233)" stop-opacity="1"></stop>
+            <stop offset="100%" stop-color="rgb(0,0,255)" stop-opacity="1"></stop>
+        </linearGradient>
+
+        <rect id="backgound"
+              width="100%" height="1000px" fill="black" />
+
+
+        <rect id="object"
+              x="0" y="50%" width="100%" height="500px" fill="url(#substance)" />
+
+        <line class="n1-ray"
+              x1="20" y1="0" x2="520" y2="50%" />
+        <line class="n1-ray"
+              x1="60" y1="0" x2="560" y2="50%" />
+        <line class="n1-ray"
+              x1="100" y1="0" x2="600" y2="50%" />
+        <line class="n1-ray"
+              x1="140" y1="0" x2="640" y2="50%" />
+        <line class="n1-ray"
+              x1="180" y1="0" x2="680" y2="50%" />
+        <line class="n1-ray"
+              x1="220" y1="0" x2="720" y2="50%" />
+
+        <line class="n2-ray"
+              x1="520" y1="50%" x2="620" y2="100%" />
+        <line class="n2-ray"
+              x1="60" y1="0" x2="560" y2="50%" />
+        <line class="n2-ray"
+              x1="100" y1="0" x2="600" y2="50%" />
+        <line class="n2-ray"
+              x1="140" y1="0" x2="640" y2="50%" />
+        <line class="n2-ray"
+              x1="180" y1="0" x2="680" y2="50%" />
+        <line class="n2-ray"
+              x1="220" y1="0" x2="720" y2="50%" />
+
+    </svg>
+</body>
+
+</html>

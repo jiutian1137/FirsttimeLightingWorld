@@ -1,0 +1,533 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="clmagic\openglutil\GL\glew.c">
+      <Filter>clmagic\openglutil\GL</Filter>
+    </ClCompile>
+    <ClCompile Include="atmosphere\model.cc">
+      <Filter>atmosphere</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="glfw">
+      <UniqueIdentifier>{63b9ed37-6bee-4ba1-99f8-73efb73acc4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assimp">
+      <UniqueIdentifier>{09421fa0-538f-45f6-96aa-ddc700f2e96c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="opencv">
+      <UniqueIdentifier>{e8999dbb-2885-4707-aca6-70f1c307c780}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="opencv\opencv2">
+      <UniqueIdentifier>{44b40a0c-53c8-45d0-bc02-a3d34b995710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="atmosphere">
+      <UniqueIdentifier>{8b0998b3-9476-4527-998a-15f1565a8a6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clmagic">
+      <UniqueIdentifier>{8ce352e7-a2f1-4d96-aa10-e03628f82f2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clmagic\openglutil">
+      <UniqueIdentifier>{628943c0-78ad-4aed-aa1b-d85fe13abef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clmagic\openglutil\GL">
+      <UniqueIdentifier>{91221bff-aac4-4d02-84d7-2ff50bfb983d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="asset_model">
+      <UniqueIdentifier>{e3ce7142-dbc6-40f0-b399-288888e8f417}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="asset_shader">
+      <UniqueIdentifier>{7fcbc878-f897-4425-9360-d984c30e28f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="asset_shader\scene">
+      <UniqueIdentifier>{3a34e4a9-6b63-4e0d-a25a-6a31d77add88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clmagic\calculation">
+      <UniqueIdentifier>{50816886-9b83-4cd5-aadb-f9a6fedc1cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clmagic\calculation\lapack">
+      <UniqueIdentifier>{a67f4064-6b23-4792-8f20-83d85e8daef6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clmagic\calculation\complex">
+      <UniqueIdentifier>{33a33f90-3f30-41eb-b8f4-92846fd2c4e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="clmagic\calculation\numeric">
+      <UniqueIdentifier>{f891e3a3-b022-4a5e-a742-a74de93e8372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="asset_shader\volume">
+      <UniqueIdentifier>{09177724-ae9f-4b30-8343-7169304ce9bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="asset_model\cloud">
+      <UniqueIdentifier>{89788aab-88de-445e-a55a-a2a85f7c93cc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="glfw\glfw3.h">
+      <Filter>glfw</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\aabb.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\ai_assert.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\anim.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\BaseImporter.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Bitmap.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\BlobIOSystem.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\ByteSwapper.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\camera.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\cexport.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\cfileio.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\cimport.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\color4.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\config.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\CreateAnimMesh.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\DefaultIOStream.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\DefaultIOSystem.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\DefaultLogger.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Defines.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\defs.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Exceptional.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Exporter.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\fast_atof.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\GenericProperty.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Hash.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Importer.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\importerdesc.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\IOStream.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\IOStreamBuffer.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\IOSystem.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\irrXMLWrapper.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\light.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\LineSplitter.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\LogAux.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Logger.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\LogStream.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\material.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\MathFunctions.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\matrix3x3.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\matrix4x4.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\MemoryIOWrapper.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\mesh.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\metadata.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\NullLogger.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\ParsingUtils.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\pbrmaterial.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\postprocess.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Profiler.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\ProgressHandler.hpp">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\qnan.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\quaternion.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\RemoveComments.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\scene.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\SceneCombiner.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\SGSpatialSort.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\SkeletonMeshBuilder.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\SmoothingGroups.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\SpatialSort.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\StandardShapes.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\StreamReader.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\StreamWriter.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\StringComparison.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\StringUtils.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Subdivision.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\texture.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\TinyFormatter.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\types.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\vector2.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\vector3.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\version.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\Vertex.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\XMLTools.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="assimp\ZipArchiveIOSystem.h">
+      <Filter>assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv.hpp">
+      <Filter>opencv</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\calib3d.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\core.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\cvconfig.h">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\dnn.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\features2d.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\flann.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\highgui.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\imgcodecs.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\imgproc.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\ml.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\objdetect.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\opencv_modules.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\photo.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\stitching.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\video.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="opencv\opencv2\videoio.hpp">
+      <Filter>opencv\opencv2</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\constants.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\model.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\openglutil\basic.h">
+      <Filter>clmagic\openglutil</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\openglutil\glbuffer.h">
+      <Filter>clmagic\openglutil</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\openglutil\glshader.h">
+      <Filter>clmagic\openglutil</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\openglutil\gltexture.h">
+      <Filter>clmagic\openglutil</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\openglutil\glut.h">
+      <Filter>clmagic\openglutil</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\openglutil\GL\glew.h">
+      <Filter>clmagic\openglutil\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\openglutil\GL\wglew.h">
+      <Filter>clmagic\openglutil\GL</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\glsl.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\ComputeTransmittance.frag.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\Compute_.vert">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\ComputeDirectIrradiance.frag.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\ComputeSingleScattering.frag.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\ComputeScatteringDensity.frag.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\ComputeIndirectIrradiance.frag.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\ComputeMultipleScattering.frag.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\Atmosphere.glsl.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="atmosphere\API.glsl.h">
+      <Filter>atmosphere</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\lapack\algorithm.h">
+      <Filter>clmagic\calculation\lapack</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\lapack\block.h">
+      <Filter>clmagic\calculation\lapack</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\lapack\geometry.h">
+      <Filter>clmagic\calculation\lapack</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\lapack\matrix.h">
+      <Filter>clmagic\calculation\lapack</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\lapack\simd.h">
+      <Filter>clmagic\calculation\lapack</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\lapack\vector.h">
+      <Filter>clmagic\calculation\lapack</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\complex\quaternion.h">
+      <Filter>clmagic\calculation\complex</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\bitset.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\clmagic.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\formula.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\formula_e.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\formula_t.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\random.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\rational.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\real.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\statistics.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="asset_shader\volume\volume.frag.h">
+      <Filter>asset_shader\volume</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\numeric\numeric.h">
+      <Filter>clmagic\calculation\numeric</Filter>
+    </ClInclude>
+    <ClInclude Include="asset_shader\volume\volumeX.glsl.h">
+      <Filter>asset_shader\volume</Filter>
+    </ClInclude>
+    <ClInclude Include="asset_shader\volume\shadow.frag.h">
+      <Filter>asset_shader\volume</Filter>
+    </ClInclude>
+    <ClInclude Include="clmagic\calculation\to_string.h">
+      <Filter>clmagic\calculation</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assimp\color4.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="assimp\material.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="assimp\matrix3x3.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="assimp\matrix4x4.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="assimp\quaternion.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="assimp\SmoothingGroups.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="assimp\vector2.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="assimp\vector3.inl">
+      <Filter>assimp</Filter>
+    </None>
+    <None Include="asset_shader\scene\scene.vert">
+      <Filter>asset_shader\scene</Filter>
+    </None>
+    <None Include="asset_shader\final.vert">
+      <Filter>asset_shader</Filter>
+    </None>
+    <None Include="atmosphere\functions.glsl.h">
+      <Filter>atmosphere</Filter>
+    </None>
+    <None Include="atmosphere\definitions.glsl.h">
+      <Filter>atmosphere</Filter>
+    </None>
+    <None Include="atmosphere\Compute_.geom">
+      <Filter>atmosphere</Filter>
+    </None>
+    <None Include="asset_shader\final.frag.h">
+      <Filter>asset_shader</Filter>
+    </None>
+    <None Include="asset_shader\scene\texture.frag.h">
+      <Filter>asset_shader\scene</Filter>
+    </None>
+    <None Include="asset_shader\scene\scene_depth.frag">
+      <Filter>asset_shader\scene</Filter>
+    </None>
+    <None Include="asset_shader\scene\scene_depth.vert">
+      <Filter>asset_shader\scene</Filter>
+    </None>
+    <None Include="asset_shader\volume\volume.vert">
+      <Filter>asset_shader\volume</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="asset_model\cloud\cloud_height.png">
+      <Filter>asset_model\cloud</Filter>
+    </Image>
+    <Image Include="asset_model\cloud\base_cloud.png">
+      <Filter>asset_model\cloud</Filter>
+    </Image>
+    <Image Include="asset_model\cloud\cirrus_weather.png">
+      <Filter>asset_model\cloud</Filter>
+    </Image>
+    <Image Include="asset_model\cloud\cloud_curl.png">
+      <Filter>asset_model\cloud</Filter>
+    </Image>
+    <Image Include="asset_model\cloud\cloud_detail.png">
+      <Filter>asset_model\cloud</Filter>
+    </Image>
+    <Image Include="asset_model\cloud\cloud_weather.png">
+      <Filter>asset_model\cloud</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{97781dbe-0147-42cf-8752-a5cd2210775c}</ProjectGuid>
+    <RootNamespace>dreamworld1</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>opencv;./;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>opencv;./;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>opencv;./;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>opencv;./;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="asset_shader\volume\volume.vert">
+      <FileType>Document</FileType>
+    </None>
+    <ClCompile Include="atmosphere\model.cc" />
+    <ClCompile Include="clmagic\openglutil\GL\glew.c" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="asset_shader\volume\shadow.frag.h" />
+    <ClInclude Include="asset_shader\volume\volume.frag.h" />
+    <ClInclude Include="asset_shader\volume\volumeX.glsl.h" />
+    <ClInclude Include="assimp\aabb.h" />
+    <ClInclude Include="assimp\ai_assert.h" />
+    <ClInclude Include="assimp\anim.h" />
+    <ClInclude Include="assimp\BaseImporter.h" />
+    <ClInclude Include="assimp\Bitmap.h" />
+    <ClInclude Include="assimp\BlobIOSystem.h" />
+    <ClInclude Include="assimp\ByteSwapper.h" />
+    <ClInclude Include="assimp\camera.h" />
+    <ClInclude Include="assimp\cexport.h" />
+    <ClInclude Include="assimp\cfileio.h" />
+    <ClInclude Include="assimp\cimport.h" />
+    <ClInclude Include="assimp\color4.h" />
+    <ClInclude Include="assimp\config.h" />
+    <ClInclude Include="assimp\CreateAnimMesh.h" />
+    <ClInclude Include="assimp\DefaultIOStream.h" />
+    <ClInclude Include="assimp\DefaultIOSystem.h" />
+    <ClInclude Include="assimp\DefaultLogger.hpp" />
+    <ClInclude Include="assimp\Defines.h" />
+    <ClInclude Include="assimp\defs.h" />
+    <ClInclude Include="assimp\Exceptional.h" />
+    <ClInclude Include="assimp\Exporter.hpp" />
+    <ClInclude Include="assimp\fast_atof.h" />
+    <ClInclude Include="assimp\GenericProperty.h" />
+    <ClInclude Include="assimp\Hash.h" />
+    <ClInclude Include="assimp\Importer.hpp" />
+    <ClInclude Include="assimp\importerdesc.h" />
+    <ClInclude Include="assimp\IOStream.hpp" />
+    <ClInclude Include="assimp\IOStreamBuffer.h" />
+    <ClInclude Include="assimp\IOSystem.hpp" />
+    <ClInclude Include="assimp\irrXMLWrapper.h" />
+    <ClInclude Include="assimp\light.h" />
+    <ClInclude Include="assimp\LineSplitter.h" />
+    <ClInclude Include="assimp\LogAux.h" />
+    <ClInclude Include="assimp\Logger.hpp" />
+    <ClInclude Include="assimp\LogStream.hpp" />
+    <ClInclude Include="assimp\material.h" />
+    <ClInclude Include="assimp\MathFunctions.h" />
+    <ClInclude Include="assimp\matrix3x3.h" />
+    <ClInclude Include="assimp\matrix4x4.h" />
+    <ClInclude Include="assimp\MemoryIOWrapper.h" />
+    <ClInclude Include="assimp\mesh.h" />
+    <ClInclude Include="assimp\metadata.h" />
+    <ClInclude Include="assimp\NullLogger.hpp" />
+    <ClInclude Include="assimp\ParsingUtils.h" />
+    <ClInclude Include="assimp\pbrmaterial.h" />
+    <ClInclude Include="assimp\postprocess.h" />
+    <ClInclude Include="assimp\Profiler.h" />
+    <ClInclude Include="assimp\ProgressHandler.hpp" />
+    <ClInclude Include="assimp\qnan.h" />
+    <ClInclude Include="assimp\quaternion.h" />
+    <ClInclude Include="assimp\RemoveComments.h" />
+    <ClInclude Include="assimp\scene.h" />
+    <ClInclude Include="assimp\SceneCombiner.h" />
+    <ClInclude Include="assimp\SGSpatialSort.h" />
+    <ClInclude Include="assimp\SkeletonMeshBuilder.h" />
+    <ClInclude Include="assimp\SmoothingGroups.h" />
+    <ClInclude Include="assimp\SpatialSort.h" />
+    <ClInclude Include="assimp\StandardShapes.h" />
+    <ClInclude Include="assimp\StreamReader.h" />
+    <ClInclude Include="assimp\StreamWriter.h" />
+    <ClInclude Include="assimp\StringComparison.h" />
+    <ClInclude Include="assimp\StringUtils.h" />
+    <ClInclude Include="assimp\Subdivision.h" />
+    <ClInclude Include="assimp\texture.h" />
+    <ClInclude Include="assimp\TinyFormatter.h" />
+    <ClInclude Include="assimp\types.h" />
+    <ClInclude Include="assimp\vector2.h" />
+    <ClInclude Include="assimp\vector3.h" />
+    <ClInclude Include="assimp\version.h" />
+    <ClInclude Include="assimp\Vertex.h" />
+    <ClInclude Include="assimp\XMLTools.h" />
+    <ClInclude Include="assimp\ZipArchiveIOSystem.h" />
+    <ClInclude Include="atmosphere\API.glsl.h" />
+    <ClInclude Include="atmosphere\Atmosphere.glsl.h" />
+    <ClInclude Include="atmosphere\ComputeDirectIrradiance.frag.h" />
+    <ClInclude Include="atmosphere\ComputeIndirectIrradiance.frag.h" />
+    <ClInclude Include="atmosphere\ComputeMultipleScattering.frag.h" />
+    <ClInclude Include="atmosphere\ComputeScatteringDensity.frag.h" />
+    <ClInclude Include="atmosphere\ComputeSingleScattering.frag.h" />
+    <ClInclude Include="atmosphere\Compute_.vert" />
+    <ClInclude Include="atmosphere\ComputeTransmittance.frag.h" />
+    <ClInclude Include="atmosphere\constants.h" />
+    <ClInclude Include="atmosphere\glsl.h" />
+    <ClInclude Include="atmosphere\model.h" />
+    <ClInclude Include="clmagic\calculation\complex\quaternion.h" />
+    <ClInclude Include="clmagic\calculation\lapack\algorithm.h" />
+    <ClInclude Include="clmagic\calculation\lapack\block.h" />
+    <ClInclude Include="clmagic\calculation\lapack\geometry.h" />
+    <ClInclude Include="clmagic\calculation\lapack\matrix.h" />
+    <ClInclude Include="clmagic\calculation\lapack\simd.h" />
+    <ClInclude Include="clmagic\calculation\lapack\vector.h" />
+    <ClInclude Include="clmagic\calculation\numeric\bitset.h" />
+    <ClInclude Include="clmagic\calculation\numeric\clmagic.h" />
+    <ClInclude Include="clmagic\calculation\numeric\formula.h" />
+    <ClInclude Include="clmagic\calculation\numeric\formula_e.h" />
+    <ClInclude Include="clmagic\calculation\numeric\formula_t.h" />
+    <ClInclude Include="clmagic\calculation\numeric\numeric.h" />
+    <ClInclude Include="clmagic\calculation\numeric\random.h" />
+    <ClInclude Include="clmagic\calculation\numeric\rational.h" />
+    <ClInclude Include="clmagic\calculation\numeric\real.h" />
+    <ClInclude Include="clmagic\calculation\numeric\statistics.h" />
+    <ClInclude Include="clmagic\calculation\to_string.h" />
+    <ClInclude Include="clmagic\openglutil\basic.h" />
+    <ClInclude Include="clmagic\openglutil\glbuffer.h" />
+    <ClInclude Include="clmagic\openglutil\glshader.h" />
+    <ClInclude Include="clmagic\openglutil\gltexture.h" />
+    <ClInclude Include="clmagic\openglutil\glut.h" />
+    <ClInclude Include="clmagic\openglutil\GL\glew.h" />
+    <ClInclude Include="clmagic\openglutil\GL\wglew.h" />
+    <ClInclude Include="glfw\glfw3.h" />
+    <ClInclude Include="opencv\opencv.hpp" />
+    <ClInclude Include="opencv\opencv2\calib3d.hpp" />
+    <ClInclude Include="opencv\opencv2\core.hpp" />
+    <ClInclude Include="opencv\opencv2\cvconfig.h" />
+    <ClInclude Include="opencv\opencv2\dnn.hpp" />
+    <ClInclude Include="opencv\opencv2\features2d.hpp" />
+    <ClInclude Include="opencv\opencv2\flann.hpp" />
+    <ClInclude Include="opencv\opencv2\highgui.hpp" />
+    <ClInclude Include="opencv\opencv2\imgcodecs.hpp" />
+    <ClInclude Include="opencv\opencv2\imgproc.hpp" />
+    <ClInclude Include="opencv\opencv2\ml.hpp" />
+    <ClInclude Include="opencv\opencv2\objdetect.hpp" />
+    <ClInclude Include="opencv\opencv2\opencv_modules.hpp" />
+    <ClInclude Include="opencv\opencv2\photo.hpp" />
+    <ClInclude Include="opencv\opencv2\stitching.hpp" />
+    <ClInclude Include="opencv\opencv2\video.hpp" />
+    <ClInclude Include="opencv\opencv2\videoio.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="asset_shader\final.frag.h" />
+    <None Include="asset_shader\final.vert" />
+    <None Include="asset_shader\scene\scene.vert" />
+    <None Include="asset_shader\scene\scene_depth.frag" />
+    <None Include="asset_shader\scene\scene_depth.vert" />
+    <None Include="asset_shader\scene\texture.frag.h" />
+    <None Include="assimp\color4.inl" />
+    <None Include="assimp\material.inl" />
+    <None Include="assimp\matrix3x3.inl" />
+    <None Include="assimp\matrix4x4.inl" />
+    <None Include="assimp\quaternion.inl" />
+    <None Include="assimp\SmoothingGroups.inl" />
+    <None Include="assimp\vector2.inl" />
+    <None Include="assimp\vector3.inl" />
+    <None Include="atmosphere\Compute_.geom" />
+    <None Include="atmosphere\definitions.glsl.h" />
+    <None Include="atmosphere\functions.glsl.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="asset_model\cloud\base_cloud.png" />
+    <Image Include="asset_model\cloud\cirrus_weather.png" />
+    <Image Include="asset_model\cloud\cloud_curl.png" />
+    <Image Include="asset_model\cloud\cloud_detail.png" />
+    <Image Include="asset_model\cloud\cloud_height.png" />
+    <Image Include="asset_model\cloud\cloud_weather.png" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

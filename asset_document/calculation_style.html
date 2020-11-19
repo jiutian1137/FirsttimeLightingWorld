@@ -1,0 +1,46 @@
+﻿<html>
+    <body style="text-align:left">
+
+        <p style="color:deepskyblue; font-size:20px">
+calculation style
+        </p>
+
+        <p><pre style="color:skyblue">
+引用类型 和 值类型，刚才查看了这两种情况 分别编译出的 汇编指令，在简单情况下 是一模一样的。
+在编译器的视角下 引用类型=地址，值类型=(如果是变量?地址:值).
+指令运算 例如_mm_add_ps(xmm1, xmm2), 
+编译的结果=(如果是变量 ?
+                xmm1 = _mm_load_ps(&43423430);
+                xmm2 = _mm_load_ps(&43423440);
+                _mm_add_ps(xmm1, xmm2);
+            :
+                xmm1 = _mm_load_ps(&43423430);
+                xmm2 = _mm_set_ps(10.0f, 2.0f, 3.0f, 1.0f);
+                _mm_add_ps(xmm1, xmm2);
+            )
+        </pre></p>
+
+        <p><pre style="color:lightskyblue">
+引用类型无论如何 都会将一个<名称> 视作地址处理，
+而值类型 可能会存在 拷贝，
+因此 即使是<数学算术> 如果是<通用泛型> 引用会比值更好
+        </pre></p>
+
+        <p><pre style="color:deepskyblue">
+<数学算术>有时 也可以去掉引用(因为肯定会被编译为内联函数)，那么语义上会更合适例如:
+vector scale(vector, real); //更简单直观,并且因为字符数少了 所以编译过程被优化
+vector scale(const vector&, const real&);
+        </pre></p>
+
+        <p><pre style="color:dodgerblue">
+我的决策是:
+
+if(dynamic_memory){
+    一定用 引用类型
+} else {
+    几乎都用 值类型，
+    因为const是关键字有变色 会使得代码看上去有断层，会更容易区分 函数名与函数参数列表，所以也可能会用 引用类型
+}
+        </pre></p>
+    </body>
+</html>

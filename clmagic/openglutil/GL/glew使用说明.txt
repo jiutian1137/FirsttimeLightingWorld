@@ -1,0 +1,10 @@
+GL/eglew.h 中包含了KHR/khrplatform.h 
+	        EGL/eglplatform.h
+所以,当使用glew操纵OpenGL ES  必须要准备好这个两个文件
+
+
+
+不可以与其他获取OpenGL函数的库一起使用
+使用时必须在 #include <gl/glew.h> 之前加上 #define GLEW_STATIC
+
+
