@@ -2,7 +2,7 @@
 <Dream World 1, Volume Cloud>
 Free-License
 
-[Contribution guidelines for this project](asset_result/temp.png)
+[image](asset_result/temp.png)
 
 
 Teams:
