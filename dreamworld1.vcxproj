@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="asset_model\EzeFrance\EzeFrance.mtl" />
     <None Include="asset_shader\volume\volume.vert">
       <FileType>Document</FileType>
     </None>
@@ -316,6 +317,9 @@
     <Image Include="asset_model\cloud\cloud_detail.png" />
     <Image Include="asset_model\cloud\cloud_height.png" />
     <Image Include="asset_model\cloud\cloud_weather.png" />
+    <Image Include="asset_model\EzeFrance\Chunk0_Color.png" />
+    <Image Include="asset_model\EzeFrance\Chunk1_Color.png" />
+    <Image Include="asset_model\EzeFrance\Chunk2_Color.png" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="assimp-vc142-mt.lib" />
@@ -323,6 +327,14 @@
     <Library Include="glfw3.lib" />
     <Library Include="opencv_world440.lib" />
     <Library Include="opencv_world440d.lib" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="asset_model\EzeFrance\EzeFrance.obj">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="asset_model\EzeFrance\README.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
