@@ -646,60 +646,60 @@ inline GLuniformLocationAtmosphere glGetUniformLocationAtmosphere(GLuint program
 
 inline void glUniformAtmosphere(const GLuniformLocationAtmosphere& location, const std::array<double,3> lambdas, const atmosphere::AtmosphereParameters& atmosphere) {
     // ...
-    glUniform3f(location.solar_irradiance, physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.solar_irradiance, lambdas[0]),
-                                            physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.solar_irradiance, lambdas[1]),
-                                            physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.solar_irradiance, lambdas[2]));
-    glUniform1f(location.sun_angular_radius, atmosphere.sun_angular_radius);
-    glUniform1f(location.bottom_radius, atmosphere.bottom_radius / atmosphere.length_unit_in_meters);
-    glUniform1f(location.top_radius, atmosphere.top_radius / atmosphere.length_unit_in_meters);
+    glUniform3f(location.solar_irradiance, (float)physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.solar_irradiance, lambdas[0]),
+                                           (float)physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.solar_irradiance, lambdas[1]),
+                                            (float)physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.solar_irradiance, lambdas[2]));
+    glUniform1f(location.sun_angular_radius, (float)atmosphere.sun_angular_radius);
+    glUniform1f(location.bottom_radius, (float)(atmosphere.bottom_radius / atmosphere.length_unit_in_meters));
+    glUniform1f(location.top_radius, (float)(atmosphere.top_radius / atmosphere.length_unit_in_meters));
    
     // Rayleigh
     for (size_t i = 0; i != 2; ++i) {
-        glUniform1f(location.rayleigh_density[i][0], atmosphere.rayleigh_density[i].width / atmosphere.length_unit_in_meters);
-        glUniform1f(location.rayleigh_density[i][1], atmosphere.rayleigh_density[i].exp_term);
-        glUniform1f(location.rayleigh_density[i][2], atmosphere.rayleigh_density[i].exp_scale * atmosphere.length_unit_in_meters);
-        glUniform1f(location.rayleigh_density[i][3], atmosphere.rayleigh_density[i].linear_term * atmosphere.length_unit_in_meters);
-        glUniform1f(location.rayleigh_density[i][4], atmosphere.rayleigh_density[i].constant_term);
+        glUniform1f(location.rayleigh_density[i][0], (float)(atmosphere.rayleigh_density[i].width / atmosphere.length_unit_in_meters));
+        glUniform1f(location.rayleigh_density[i][1], (float)atmosphere.rayleigh_density[i].exp_term);
+        glUniform1f(location.rayleigh_density[i][2], (float)(atmosphere.rayleigh_density[i].exp_scale * atmosphere.length_unit_in_meters));
+        glUniform1f(location.rayleigh_density[i][3], (float)(atmosphere.rayleigh_density[i].linear_term * atmosphere.length_unit_in_meters));
+        glUniform1f(location.rayleigh_density[i][4], (float)atmosphere.rayleigh_density[i].constant_term);
     }
-    glUniform3f(location.rayleigh_scattering, physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.rayleigh_scattering, lambdas[0]) * atmosphere.length_unit_in_meters,
-                                              physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.rayleigh_scattering, lambdas[1]) * atmosphere.length_unit_in_meters,
-                                              physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.rayleigh_scattering, lambdas[2]) * atmosphere.length_unit_in_meters);
+    glUniform3f(location.rayleigh_scattering, (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.rayleigh_scattering, lambdas[0]) * atmosphere.length_unit_in_meters),
+                                              (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.rayleigh_scattering, lambdas[1]) * atmosphere.length_unit_in_meters),
+                                              (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.rayleigh_scattering, lambdas[2]) * atmosphere.length_unit_in_meters));
 
     // Mie..
     for (size_t i = 0; i != 2; ++i) {
-        glUniform1f(location.mie_density[i][0], atmosphere.mie_density[i].width / atmosphere.length_unit_in_meters);
-        glUniform1f(location.mie_density[i][1], atmosphere.mie_density[i].exp_term);
-        glUniform1f(location.mie_density[i][2], atmosphere.mie_density[i].exp_scale * atmosphere.length_unit_in_meters);
-        glUniform1f(location.mie_density[i][3], atmosphere.mie_density[i].linear_term * atmosphere.length_unit_in_meters);
-        glUniform1f(location.mie_density[i][4], atmosphere.mie_density[i].constant_term);
+        glUniform1f(location.mie_density[i][0], (float)(atmosphere.mie_density[i].width / atmosphere.length_unit_in_meters));
+        glUniform1f(location.mie_density[i][1], (float)atmosphere.mie_density[i].exp_term);
+        glUniform1f(location.mie_density[i][2], (float)(atmosphere.mie_density[i].exp_scale * atmosphere.length_unit_in_meters));
+        glUniform1f(location.mie_density[i][3], (float)(atmosphere.mie_density[i].linear_term * atmosphere.length_unit_in_meters));
+        glUniform1f(location.mie_density[i][4], (float)atmosphere.mie_density[i].constant_term);
     }
-    glUniform3f(location.mie_scattering, physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_scattering, lambdas[0]) * atmosphere.length_unit_in_meters,
-                                         physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_scattering, lambdas[1]) * atmosphere.length_unit_in_meters,
-                                         physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_scattering, lambdas[2]) * atmosphere.length_unit_in_meters);
-    glUniform3f(location.mie_extinction, physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_extinction, lambdas[0]) * atmosphere.length_unit_in_meters,
-                                         physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_extinction, lambdas[1]) * atmosphere.length_unit_in_meters,
-                                         physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_extinction, lambdas[2]) * atmosphere.length_unit_in_meters);
-    glUniform1f(location.mie_phase_function_g, atmosphere.mie_phase_function_g);
+    glUniform3f(location.mie_scattering, (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_scattering, lambdas[0]) * atmosphere.length_unit_in_meters),
+                                         (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_scattering, lambdas[1]) * atmosphere.length_unit_in_meters),
+                                         (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_scattering, lambdas[2]) * atmosphere.length_unit_in_meters));
+    glUniform3f(location.mie_extinction, (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_extinction, lambdas[0]) * atmosphere.length_unit_in_meters),
+                                         (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_extinction, lambdas[1]) * atmosphere.length_unit_in_meters),
+                                         (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.mie_extinction, lambdas[2]) * atmosphere.length_unit_in_meters));
+    glUniform1f(location.mie_phase_function_g, (float)atmosphere.mie_phase_function_g);
 
     // Ozone..
     for (size_t i = 0; i != 2; ++i) {
-        glUniform1f(location.absorption_density[i][0], atmosphere.absorption_density[i].width / atmosphere.length_unit_in_meters);
-        glUniform1f(location.absorption_density[i][1], atmosphere.absorption_density[i].exp_term);
-        glUniform1f(location.absorption_density[i][2], atmosphere.absorption_density[i].exp_scale * atmosphere.length_unit_in_meters);
-        glUniform1f(location.absorption_density[i][3], atmosphere.absorption_density[i].linear_term * atmosphere.length_unit_in_meters);
-        glUniform1f(location.absorption_density[i][4], atmosphere.absorption_density[i].constant_term);
+        glUniform1f(location.absorption_density[i][0], (float)(atmosphere.absorption_density[i].width / atmosphere.length_unit_in_meters));
+        glUniform1f(location.absorption_density[i][1], (float)atmosphere.absorption_density[i].exp_term);
+        glUniform1f(location.absorption_density[i][2], (float)(atmosphere.absorption_density[i].exp_scale * atmosphere.length_unit_in_meters));
+        glUniform1f(location.absorption_density[i][3], (float)(atmosphere.absorption_density[i].linear_term * atmosphere.length_unit_in_meters));
+        glUniform1f(location.absorption_density[i][4], (float)atmosphere.absorption_density[i].constant_term);
     }
-    glUniform3f(location.absorption_extinction, physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.absorption_extinction, lambdas[0]) * atmosphere.length_unit_in_meters,
-                                                physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.absorption_extinction, lambdas[1]) * atmosphere.length_unit_in_meters,
-                                                physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.absorption_extinction, lambdas[2]) * atmosphere.length_unit_in_meters);
+    glUniform3f(location.absorption_extinction, (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.absorption_extinction, lambdas[0]) * atmosphere.length_unit_in_meters),
+                                                (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.absorption_extinction, lambdas[1]) * atmosphere.length_unit_in_meters),
+                                                (float)(physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.absorption_extinction, lambdas[2]) * atmosphere.length_unit_in_meters));
 
     // ground albedo
-    glUniform3f(location.ground_albedo, physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.ground_albedo, lambdas[0]),
-                                        physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.ground_albedo, lambdas[1]),
-                                        physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.ground_albedo, lambdas[2]));
+    glUniform3f(location.ground_albedo, (float)physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.ground_albedo, lambdas[0]),
+                                        (float)physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.ground_albedo, lambdas[1]),
+                                        (float)physics::InterpolateSpectrum(atmosphere.wavelengths, atmosphere.ground_albedo, lambdas[2]));
 
     // 
-    glUniform1f(location.mu_s_min, cos(atmosphere.max_sun_zenith_angle));
+    glUniform1f(location.mu_s_min, (float)cos(atmosphere.max_sun_zenith_angle));
 }
 
 inline void glUniformAtmospherescatteringTexture(GLint transmittance_texture_location, GLint scattering_texture_location, GLint irradiance_texture_location,

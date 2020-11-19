@@ -18,10 +18,18 @@ using namespace::calculation;
 #include "assimp/scene.h"
 #include "assimp/cimport.h"
 #include "assimp/postprocess.h"
+#ifdef _DEBUG
 #pragma comment(lib, "assimp-vc142-mtd.lib")
+#else 
+#pragma comment(lib, "assimp-vc142-mt.lib")
+#endif
 
 #include "opencv/opencv.hpp"
+#ifdef _DEBUG
 #pragma comment(lib, "opencv_world440d.lib")
+#else
+#pragma comment(lib, "opencv_world440.lib")
+#endif
 
 inline
 bool glLoadTexture2D(const std::filesystem::path& filename, GLsizei width, GLsizei height, GLuint* texture_ptr) {
@@ -1043,7 +1051,6 @@ void keyfunc(GLFWwindow* Win, int key, int scancode, int action, int mods) {
 
 
 int main(int argc, char** argv) {
-
 	//cv::Mat red = cv::imread("asset_model/cloud/red.png", cv::IMREAD_GRAYSCALE);
 	//cv::Mat green = cv::imread("asset_model/cloud/green.png", cv::IMREAD_GRAYSCALE);
 	//cv::Mat blue = cv::imread("asset_model/cloud/blue.png", cv::IMREAD_GRAYSCALE);

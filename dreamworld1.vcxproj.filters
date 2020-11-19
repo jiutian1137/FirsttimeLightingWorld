@@ -512,14 +512,19 @@
     <None Include="asset_shader\volume\volume.vert">
       <Filter>asset_shader\volume</Filter>
     </None>
-    <None Include="assimp-vc142-mt.dll" />
-    <None Include="assimp-vc142-mtd.dll" />
-    <None Include="opencv_world440.dll" />
-    <None Include="opencv_world440d.dll" />
     <None Include="asset_model\EzeFrance\EzeFrance.mtl">
       <Filter>asset_model\EzeFrance</Filter>
     </None>
     <None Include="asset_model\EzeFrance\EzeFrance.obj">
+      <Filter>asset_model\EzeFrance</Filter>
+    </None>
+    <None Include="asset_model\EzeFrance\Chunk0_Color.png">
+      <Filter>asset_model\EzeFrance</Filter>
+    </None>
+    <None Include="asset_model\EzeFrance\Chunk1_Color.png">
+      <Filter>asset_model\EzeFrance</Filter>
+    </None>
+    <None Include="asset_model\EzeFrance\Chunk2_Color.png">
       <Filter>asset_model\EzeFrance</Filter>
     </None>
   </ItemGroup>
@@ -542,22 +547,6 @@
     <Image Include="asset_model\cloud\cloud_weather.png">
       <Filter>asset_model\cloud</Filter>
     </Image>
-    <Image Include="asset_model\EzeFrance\Chunk0_Color.png">
-      <Filter>asset_model\EzeFrance</Filter>
-    </Image>
-    <Image Include="asset_model\EzeFrance\Chunk1_Color.png">
-      <Filter>asset_model\EzeFrance</Filter>
-    </Image>
-    <Image Include="asset_model\EzeFrance\Chunk2_Color.png">
-      <Filter>asset_model\EzeFrance</Filter>
-    </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="assimp-vc142-mt.lib" />
-    <Library Include="assimp-vc142-mtd.lib" />
-    <Library Include="glfw3.lib" />
-    <Library Include="opencv_world440.lib" />
-    <Library Include="opencv_world440d.lib" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="asset_model\EzeFrance\README.txt">
