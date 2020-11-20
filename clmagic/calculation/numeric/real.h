@@ -947,21 +947,9 @@ namespace calculation {
 	//	return std::move(_Results);
 	//}
 
-	// { Newton }
-	template<typename _Ty, typename _Fn1, typename _Fn2>
-	_Ty tangent_iterate(_Ty x0, _Fn1 F, _Fn2 dF, size_t step) {
-		// f: f(x) = 0, cos(x) - x = 0
-		_Ty x = x0;
-		for (size_t i = 0; i != step; ++i) {
-			x = x - F(x) / dF(x);
-		}
-
-		return x;
-	}
-
+	// { G: G(x) = x, cos(x) = x }
 	template<typename _Ty, typename _Fn>
 	_Ty fixed_point_iterate(_Ty x0, _Fn G, size_t step) {
-		// g: g(x) = x, cos(x) = x
 		_Ty x = x0;
 		for (size_t i = 0; i != step; ++i) {
 			x = G(x);
@@ -987,6 +975,14 @@ namespace calculation {
 	_Ty fixed_point_iterate_convergence_speed(_Ty solved_value, _Fn dG) {
 		return abs(dG(solved_value));
 	}
+
+	// { F(x) = 0, cos(x)-x = 0, Newton }
+	template<typename _Ty, typename _Fn1, typename _Fn2>
+	_Ty tangent_iterate(_Ty x0, _Fn1 F, _Fn2 dF, size_t step) {
+		auto G = [F, dF](_Ty x) { return x - F(x)/dF(x);  };
+		return fixed_point_iterate(x0, G, step);
+	}
+
 
 }// namespace calculation
 

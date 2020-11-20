@@ -483,10 +483,10 @@ void _Update_sun_projection() {
 		double bottom = b_min[1];
 		double top    = b_max[1];
 		double far    = b_max[2];
-		double t0 = ray_intersect_sphsurf<double>(vector3<double>{ left, bottom,  far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
-		double t1 = ray_intersect_sphsurf<double>(vector3<double>{ right, bottom, far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
-		double t2 = ray_intersect_sphsurf<double>(vector3<double>{ left,  top,    far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
-		double t3 = ray_intersect_sphsurf<double>(vector3<double>{ right, top,    far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
+		double t0 = ray_intersect_sphsurf(vector3<double>{ left, bottom,  far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
+		double t1 = ray_intersect_sphsurf(vector3<double>{ right, bottom, far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
+		double t2 = ray_intersect_sphsurf(vector3<double>{ left,  top,    far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
+		double t3 = ray_intersect_sphsurf(vector3<double>{ right, top,    far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
 		t0 = isnan(t0) ? 0.0 : t0;
 		t1 = isnan(t1) ? 0.0 : t1;
 		t2 = isnan(t2) ? 0.0 : t2;

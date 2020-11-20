@@ -185,8 +185,8 @@ void main(){
 	}
 
 	
-	//gl_FragColor.rgb = 1.0 - exp(-radiance * 10.0f);
-	gl_FragColor.rgb = ACESFilm(radiance * 10.0f);
+	gl_FragColor.rgb = 1.0 - exp(-radiance * 10.0f);
+	//gl_FragColor.rgb = ACESFilm(radiance * 10.0f);
 	gl_FragColor.rgb = pow(gl_FragColor.rgb, vec3(1.0 / 2.2));
 	
 	//gl_FragColor.rgb = texture(volume_shadow_texture, texcoord).rgb;

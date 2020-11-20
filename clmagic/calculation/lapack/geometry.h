@@ -147,15 +147,15 @@ namespace calculation {
 	</Desirable Bounding Volume Characteristics>*/
 
 
-	template<typename result_t/*noAuto*/, typename point_t, typename vector_t, typename length_t>
-	result_t ray_intersect_sphere(point_t r_origin, vector_t r_direction, point_t sph_center, length_t sph_radius) {
-		vector_t center_to_origin = r_origin - sph_center;
-		result_t t0, t1;
-		bool     intersect = quadratic_accurate(dot(r_direction, r_direction), 
-												dot(center_to_origin, r_direction) * static_cast<length_t>(2),
-												dot(center_to_origin, center_to_origin) - sph_radius*sph_radius, t0, t1);
-		result_t Zero = static_cast<result_t>(0);
-		return (intersect & (t0 >= Zero || t1 >= Zero)) ? max(min(t0, t1), Zero) : std::numeric_limits<result_t>::quiet_NaN();
+	template<typename point_t, typename vector_t, typename length_t>
+	length_t ray_intersect_sphere(point_t r_origin, vector_t r_direction, point_t sph_center, length_t sph_radius) {
+		vector_t center_to_origin = (r_origin - sph_center);
+		length_t lowest_distance, max_distance;
+		bool intersect = quadratic_accurate(dot(r_direction, r_direction), 
+										    dot(center_to_origin, r_direction) * static_cast<length_t>(2),
+										    dot(center_to_origin, center_to_origin) - sph_radius*sph_radius,
+										    lowest_distance, max_distance);
+		return intersect ? min(max(lowest_distance, static_cast<length_t>(0)), max_distance) : std::numeric_limits<length_t>::quiet_NaN();
 		/*<idea> length_sqrare((r_origin + r_direction * t) - sph_center) = sph_radius * sph_radius : x*x + y*y + z*z = R*R
 			dot((O+D*t) - C, (O+D*t) - C) = R * R
 			   dot(O-C + D*t, O-C + D*t)  = R * R
@@ -165,15 +165,15 @@ namespace calculation {
 		</idea>*/
 	}
 
-	template<typename result_t/*noAuto*/, typename point_t, typename vector_t, typename length_t>
-	result_t ray_intersect_sphsurf(point_t r_origin, vector_t r_direction, point_t sph_center, length_t sph_radius) {
-		vector_t center_to_origin = r_origin - sph_center;
-		result_t t0, t1;
-		bool     intersect = quadratic_accurate(dot(r_direction, r_direction), 
-												dot(center_to_origin, r_direction) * static_cast<length_t>(2),
-												dot(center_to_origin, center_to_origin) - sph_radius*sph_radius, t0, t1);
-		result_t Zero = static_cast<result_t>(0);
-		return (intersect && (t0 >= Zero || t1 >= Zero)) ? (t0 >= Zero ? t0 : t1) : std::numeric_limits<result_t>::quiet_NaN();
+	template<typename point_t, typename vector_t, typename length_t>
+	length_t ray_intersect_sphsurf(point_t r_origin, vector_t r_direction, point_t sph_center, length_t sph_radius) {
+		vector_t center_to_origin = (r_origin - sph_center);
+		length_t lowest_distance, max_distance;
+		bool intersect = quadratic_accurate(dot(r_direction, r_direction), 
+										    dot(center_to_origin, r_direction) * static_cast<length_t>(2),
+											dot(center_to_origin, center_to_origin) - sph_radius*sph_radius, 
+											lowest_distance, max_distance);
+		return intersect ? (lowest_distance >= static_cast<length_t>(0) ? lowest_distance : max_distance) : std::numeric_limits<length_t>::quiet_NaN();
 	}
 
 	template<typename result_t/*noAuto*/, typename point_t, typename vector_t>
@@ -230,7 +230,7 @@ namespace calculation {
 		auto     distance_vector = right_center - left_center;
 		length_t sqr_distance    = dot(distance_vector, distance_vector);
 		length_t total_radius    = left_radius + right_radius;
-		return sqr_distance <= (total_radius* total_radius);
+		return sqr_distance <= (total_radius*total_radius);
 	}
 	
 	template<typename point_t, typename vector_t, typename length_t>
@@ -251,30 +251,8 @@ namespace calculation {
 
 	template<typename point_t, typename vector_t, typename length_t> inline
 	bool ray_test_plane(point_t r_origin, vector_t r_direction, vector_t pl_normal, length_t pl_distance) {
-		return ray_intersect_plane(r_origin, r_direction, pl_normal, pl_distance) >= static_cast<length_t>(0);
+		return ray_intersect_plane<length_t>(r_origin, r_direction, pl_normal, pl_distance) >= static_cast<length_t>(0);
 	}
-
-
-	template<typename point_t>
-	point_t closest_point_AABB(point_t the_point, point_t b_min, point_t b_max) {
-		point_t closest_point = clamp(the_point, b_min, b_max);
-		return closest_point;
-	}
-
-	template<typename point_t>
-	auto squaredistance_closest_point_AABB(point_t the_point, point_t b_min, point_t b_max) -> decltype(dot(the_point - b_max, the_point - b_max)) {
-		using area_t = decltype( dot(the_point - b_max, the_point - b_max) );
-
-		point_t closest_point = closest_point_AABB(the_point, b_min, b_max);
-		area_t square_distance = dot(closest_point - the_point, closest_point - the_point);
-		return square_distance;
-	}
-
-	template<typename point_t, typename length_t>
-	bool AABB_test_sphere(point_t b_min, point_t b_max, point_t sph_center, length_t sph_radius) {
-		return squaredistance_closest_point_AABB(sph_center, b_min, b_max) <= (sph_radius * sph_radius);
-	}
-
 
 	template<typename result_t, ray ray_t, plane plane_t> inline
 	result_t ray_intersect_plane(ray_t r, plane_t pl) {
@@ -286,6 +264,20 @@ namespace calculation {
 		return ray_test_plane(r.origin, r.direction, pl.normal, pl.distance);
 	}
 
+	template<typename point_t>
+	point_t closest_point_AABB(point_t the_point, point_t b_min, point_t b_max) {
+		point_t closest_point = clamp(the_point, b_min, b_max);
+		return closest_point;
+	}
+
+	template<typename point_t, typename length_t>
+	bool AABB_test_sphere(point_t b_min, point_t b_max, point_t sph_center, length_t sph_radius) {
+		using area_t = decltype( dot(sph_center - b_max, sph_center - b_max) );
+
+		point_t closest_point = closest_point_AABB(sph_center, b_min, b_max);
+		area_t square_distance = dot(closest_point - sph_center, closest_point - sph_center);
+		return square_distance <= (sph_radius * sph_radius);
+	}
 
 
 	
@@ -1312,7 +1304,7 @@ namespace calculation{
 			fov    = _Fov;
 			aspect = static_cast<scalar_type>(16.0F / 9.0F);
 			nearZ  = static_cast<scalar_type>(1.F);
-			farZ   = static_cast<scalar_type>(25000.0F);
+			farZ   = static_cast<scalar_type>(40000.0F);
 		}
 
 		template<typename _MatTy>

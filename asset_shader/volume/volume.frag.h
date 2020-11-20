@@ -113,12 +113,13 @@ void main() {
 	Number cos_angle = dot(-ray_direction, sun_vector);
 	Number light_scattering_phase = clamp(DoblobeHenyeyGreenstein(cos_angle, cloud_forward_scattering, -cloud_backward_scattering, 0.5), 1.0f, 2.5f);
 
-	int volume_step = int(round( mix(128, 256, abs(ray_direction.y)) ));
 	int lighting_step = 12;
 
+	Length unit_length = 100.0;
 	Length S           = length(ray_end.xyz - ray_start.xyz);
-	Length unit_length = min(S / float(volume_step), 500*m);
-	Length detail_length = 20.0;
+	int    volume_step = int(round(clamp(S / unit_length, 0.0, 256.0)));
+	       unit_length = min(S / float(volume_step), 500*m);
+	Length detail_length = min((unit_length / 6.0f), 50*m);
 	/*Length unit_length = 60000.0 / volume_step;
 	Length detail_length = unit_length * 0.2;*/
 	
