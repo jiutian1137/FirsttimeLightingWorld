@@ -75,7 +75,8 @@ Number GetCloudDensity(
 	CloudPostion cloud_point = World2CloudCoordinate(profile, point, earth_center);
 	Number height_ratio = cloud_point[2];
 	// 2. Get Weather using CloudPosition
-	vec3   weather_data = texture(weather_map, cloud_point.xy * weather_map_scale).xyz;
+	//vec3   weather_data = texture(weather_map, point.xz * (1.0 / 50000.0) + 0.5).xyz;
+	vec3   weather_data = texture(weather_map, cloud_point.xy * weather_map_scale + 0.5).xyz;
 	Number coverage = weather_data[0];
 	Number type    = weather_data[1];
 	percipitation = weather_data[2];
@@ -85,8 +86,9 @@ Number GetCloudDensity(
 	if (0.0 <= height_ratio && height_ratio <= 1.0 && coverage != 0.0 && coverage_height != 0.0) {
 		
 		// 4. Get BaseCloud using height and coverage
-		float density = texture(traits, point * base_scale).r;
-		      density = saturate(rescale(density * coverage_height, 1.0 - coverage, 1.0)) * coverage;
+		float density = rescale((coverage + coverage_height)*0.5, 1.0 - 0.5 * texture(traits, point * base_scale).r, 1.0);
+		      /*density = saturate(rescale(density, 1.0 - coverage, 1.0));
+		      density = saturate(rescale(density, 1.0 - coverage_height, 1.0));*/
 
 		if (density > 0.0) {
 			/*vec3 direction = vec3(0.0); 
@@ -95,11 +97,10 @@ Number GetCloudDensity(
 			//direction = direction * 2.0 - 1.0;
 			// 5. Get Details(erosion) using more-and-more-High-frequency-noise
 			float detail_scale  = base_scale * detail_frequency;
-			float detail_weight = detail_weight;
 			float detail_speed  = detail_speed;
 			for (int i = 0; i != detail_octive; ++i) {
 				density = saturate(rescale(density, 
-					detail_weight * texture(detail, (point + detail_curl_vector * detail_speed) * detail_scale).r, 1.0));
+					detail_weight * (1.0 - texture(detail, (point + detail_curl_vector * detail_speed) * detail_scale).r), 1.0));
 				detail_scale  *= detail_frequency;
 				detail_weight *= 0.5;
 				detail_speed  *= detail_frequency;

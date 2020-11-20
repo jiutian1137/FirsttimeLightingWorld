@@ -473,27 +473,27 @@ void _Update_sun_projection() {
 
 	// 3. AABB and sphere in sun_view
 	vector4<double> sph_center = world_to_camera * vector4<double>{ 0.0, -6360000.0, 0.0, 1.0 };
-	double          sph_radius = 6360000.0;
+	double          sph_radius = 6360000.0 + 7000.0;
 	vector4<double> b_min = min_value_n(box_points, 8);
 	vector4<double> b_max = max_value_n(box_points, 8);
 	
-	if ( AABB_test_sphere(b_min, b_max, sph_center, sph_radius) ) {
+	if ( aabox_test_sphere(b_min, b_max, sph_center, sph_radius) ) {
 		double left   = b_min[0];
 		double right  = b_max[0];
 		double bottom = b_min[1];
 		double top    = b_max[1];
 		double far    = b_max[2];
-		double t0 = ray_intersect_sphsurf(vector3<double>{ left, bottom,  far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
-		double t1 = ray_intersect_sphsurf(vector3<double>{ right, bottom, far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
-		double t2 = ray_intersect_sphsurf(vector3<double>{ left,  top,    far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
-		double t3 = ray_intersect_sphsurf(vector3<double>{ right, top,    far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
+		double t0 = ray_intersect_sphere_surface(vector3<double>{ left, bottom,  far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
+		double t1 = ray_intersect_sphere_surface(vector3<double>{ right, bottom, far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
+		double t2 = ray_intersect_sphere_surface(vector3<double>{ left,  top,    far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
+		double t3 = ray_intersect_sphere_surface(vector3<double>{ right, top,    far }, vector3<double>{ 0, 0, -1 }, vector3_cast<vector3<double>,0,1,2>(sph_center), sph_radius);
 		t0 = isnan(t0) ? 0.0 : t0;
 		t1 = isnan(t1) ? 0.0 : t1;
 		t2 = isnan(t2) ? 0.0 : t2;
 		t3 = isnan(t3) ? 0.0 : t3;
 		double near = far - max(t0, max(t1, max(t2, t3)));
 
-		//std::cout << "t0:" << t0 << ",t1:" << t1 << ",t2:" << t2 << "t3:" << t3 << std::endl;
+		std::cout << "t0:" << t0 << ",t1:" << t1 << ",t2:" << t2 << "t3:" << t3 << std::endl;
 
 		sun._Myhorizon = { float(left), float(right) };
 		sun._Myvertical = { float(bottom), float(top) };
@@ -629,10 +629,10 @@ void volumeInit() {
 	glLoadTexture3D("asset_model/cloud/cloud_detail.png", 32, 32, 32, &tex);
 	texture[CloudDetailTexture] = GLtexture3D(tex); tex = -1;
 	
-	glLoadTexture2D("asset_model/cloud/cloud_weather3.png", -1, -1, &tex);
+	glLoadTexture2D("asset_model/cloud/cloud_weather5.png", -1, -1, &tex);
 	texture[CloudWeatherTextureFirst] = GLtexture2D(tex); tex = -1;
 
-	glLoadTexture2D("asset_model/cloud/cloud_weather2.png", -1, -1, &tex);
+	glLoadTexture2D("asset_model/cloud/cloud_weather3.png", -1, -1, &tex);
 	texture[CloudWeatherTextureSecond] = GLtexture2D(tex); tex = -1;
 	
 	glLoadTexture2D("asset_model/cloud/cloud_height.png", -1, -1, &tex);
@@ -712,9 +712,9 @@ void renderSceneShadow() {
 
 void renderVolumeShadow() {
 	auto world_to_sunproj = sun.projection_matrix<matrix4x4<double>>() * sun.view_matrix<matrix4x4<double>>();
-	std::cout << to_string(world_to_sunproj) << std::endl;
+	//std::cout << to_string(world_to_sunproj) << std::endl;
 	matrix4x4<double> sunproj_to_world = inverse(world_to_sunproj);
-	std::cout << to_string(sunproj_to_world) << std::endl;
+	//std::cout << to_string(sunproj_to_world) << std::endl;
 	matrix4x4<float> sunproj_to_world_32f;
 	matrix4x4<float> world_to_proj_32f;
 	for (size_t i = 0; i != sunproj_to_world_32f.rows(); ++i) {
@@ -982,6 +982,8 @@ void renderAtmosphere() {
 						 GL_TEXTURE6, GL_TEXTURE_2D, texture[SceneShadowTexture]);
 		glUniformTexture(glGetUniformLocation(processor[FinalProcessor], "volume_shadow_texture"),
 						 GL_TEXTURE7, GL_TEXTURE_2D, texture[VolumeShadowTexture]);
+		glUniformTexture(glGetUniformLocation(processor[FinalProcessor], "volume_shadow_transmittance_texture"),
+						 GL_TEXTURE8, GL_TEXTURE_2D, texture[VolumeShadowTexture]);
 		glUniformMatrix4fv(glGetUniformLocation(processor[FinalProcessor], "world_to_sunproj"),
 						   1, true, world_to_sunproj.data());
 		
@@ -1051,6 +1053,28 @@ void keyfunc(GLFWwindow* Win, int key, int scancode, int action, int mods) {
 
 
 int main(int argc, char** argv) {
+	vector3<double> box_min = { -1, -1, -1 };
+	vector3<double> box_max = { +1, +1, +1 };
+	vector3<double> ray_origin = { 0, 0, 0 };
+	vector3<double> ray_direction = { 1, 0, 0 };
+	//
+	//if (ray_intersect_axisaligned_box(ray_origin, ray_direction, box_min, box_max) >= 0) {
+	//	std::cout << ray_intersect_axisaligned_box(ray_origin, ray_direction, box_min, box_max) << std::endl;
+	//}
+
+	//ray_origin = { 1, 1, 1 };
+	//if (ray_intersect_axisaligned_box(ray_origin, ray_direction, box_min, box_max) >= 0) {
+	//	std::cout << ray_intersect_axisaligned_box(ray_origin, ray_direction, box_min, box_max) << std::endl;
+	//}
+
+	//ray_origin = { -1.2, 1, 1 };
+	//if (ray_intersect_axisaligned_box(ray_origin, ray_direction, box_min, box_max) >= 0) {
+	//	std::cout << ray_intersect_axisaligned_box(ray_origin, ray_direction, box_min, box_max) << std::endl;
+	//}
+
+
+	//exit(0);
+
 	//cv::Mat red = cv::imread("asset_model/cloud/red.png", cv::IMREAD_GRAYSCALE);
 	//cv::Mat green = cv::imread("asset_model/cloud/green.png", cv::IMREAD_GRAYSCALE);
 	//cv::Mat blue = cv::imread("asset_model/cloud/blue.png", cv::IMREAD_GRAYSCALE);

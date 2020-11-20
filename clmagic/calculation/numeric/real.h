@@ -78,69 +78,90 @@ namespace calculation {
 	// %(integral)
 
 #ifndef _REMOVE_CLMAGIC_REAL_NUMERIC
+	inline bool isnan(real32_t number1) {
+		return number1 != number1;
+	}
+	inline bool isnan(real64_t number1) {
+		return number1 != number1;
+	}
+
+	inline bool isinf(real32_t number1) {
+		return _CSTD isinf(number1);
+	}
+	inline bool isinf(real64_t number1) {
+		return _CSTD isinf(number1);
+	}
+
+	inline real32_t cast_nan(real32_t number1, real32_t	cast_number = 0.0f) {
+		return isnan(number1) ? cast_number : number1;
+	}
+	inline real64_t cast_nan(real64_t number1, real64_t	cast_number = 0.0) {
+		return isnan(number1) ? cast_number : number1;
+	}
+
 #undef min
-	inline int32_t min(const int32_t number1, const int32_t number2) {
+	inline int32_t min(int32_t number1, int32_t number2) {
 		return number1 < number2 ? number1 : number2;
 	}
-	inline int64_t min(const int64_t number1, const int64_t number2) {
+	inline int64_t min(int64_t number1, int64_t number2) {
 		return number1 < number2 ? number1 : number2;
 	}
-	inline uint32_t min(const uint32_t number1, const uint32_t number2) {
+	inline uint32_t min(uint32_t number1, uint32_t number2) {
 		return number1 < number2 ? number1 : number2;
 	}
-	inline uint64_t min(const uint64_t number1, const uint64_t number2) {
+	inline uint64_t min(uint64_t number1, uint64_t number2) {
 		return number1 < number2 ? number1 : number2;
 	}
-	inline real32_t min(const real32_t number1, const real32_t number2) {
+	inline real32_t min(real32_t number1, real32_t number2) {
 		return number1 < number2 ? number1 : number2;
 	}
-	inline real64_t min(const real64_t number1, const real64_t number2) {
+	inline real64_t min(real64_t number1, real64_t number2) {
 		return number1 < number2 ? number1 : number2;
 	}
 
 #undef max
-	inline int32_t max(const int32_t number1, const int32_t number2) {
+	inline int32_t max(int32_t number1, int32_t number2) {
 		return number1 > number2 ? number1 : number2;
 	}
-	inline int64_t max(const int64_t number1, const int64_t number2) {
+	inline int64_t max(int64_t number1, int64_t number2) {
 		return number1 > number2 ? number1 : number2;
 	}
-	inline uint32_t max(const uint32_t number1, const uint32_t number2) {
+	inline uint32_t max(uint32_t number1, uint32_t number2) {
 		return number1 > number2 ? number1 : number2;
 	}
-	inline uint64_t max(const uint64_t number1, const uint64_t number2) {
+	inline uint64_t max(uint64_t number1, uint64_t number2) {
 		return number1 > number2 ? number1 : number2;
 	}
-	inline real32_t max(const real32_t number1, const real32_t number2) {
+	inline real32_t max(real32_t number1, real32_t number2) {
 		return number1 > number2 ? number1 : number2;
 	}
-	inline real64_t max(const real64_t number1, const real64_t number2) {
+	inline real64_t max(real64_t number1, real64_t number2) {
 		return number1 > number2 ? number1 : number2;
 	}
 
-	inline int32_t clamp(const int32_t number, const int32_t lower, const int32_t upper) {
+	inline int32_t clamp(int32_t number, int32_t lower, int32_t upper) {
 		return min(max(number, lower), upper);
 	}
-	inline int64_t clamp(const int64_t number, const int64_t lower, const int64_t upper) {
+	inline int64_t clamp(int64_t number, int64_t lower, int64_t upper) {
 		return min(max(number, lower), upper);
 	}
-	inline uint32_t clamp(const uint32_t number, const uint32_t lower, const uint32_t upper) {
+	inline uint32_t clamp(uint32_t number, uint32_t lower, uint32_t upper) {
 		return min(max(number, lower), upper);
 	}
-	inline uint64_t clamp(const uint64_t number, const uint64_t lower, const uint64_t upper) {
+	inline uint64_t clamp(uint64_t number, uint64_t lower, uint64_t upper) {
 		return min(max(number, lower), upper);
 	}
-	inline real32_t clamp(const real32_t number, const real32_t lower, const real32_t upper) {
+	inline real32_t clamp(real32_t number, real32_t lower, real32_t upper) {
 		return min(max(number, lower), upper);
 	}
-	inline real64_t clamp(const real64_t number, const real64_t lower, const real64_t upper) {
+	inline real64_t clamp(real64_t number, real64_t lower, real64_t upper) {
 		return min(max(number, lower), upper);
 	}
 
-	inline real32_t saturate(const real32_t number) {
+	inline real32_t saturate(real32_t number) {
 		return clamp(number, 0.0F, 1.0F);
 	}
-	inline real64_t saturate(const real64_t number) {
+	inline real64_t saturate(real64_t number) {
 		return clamp(number, 0.0, 1.0);
 	}
 

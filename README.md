@@ -3,12 +3,14 @@
 Free-License
 
 ![image](asset_result/temp.png)
+![image](asset_result/temp1.png)
+![image](asset_result/temp2.png)
 
 
 Teams:
 Probability: { 0 <= x <= 1 }
 
-1. Lighting 
+1. Lighting
   1.1 Transmittance-Equation
       Direct_radiance = Direct_radiance * Direct_energy * Direct_visibility;
       Indirect_radiance = Indirect_radiance * Indirect_energy * Indirect_visivility;
@@ -43,7 +45,9 @@ Probability: { 0 <= x <= 1 }
     Shape = Function(coverage, height_coverage, details)
     
   2.2 Schneider's Source in 2015
-    remap(base_noise * height_coverage, 1.0 - coverage, 1.0) * coverage
+    Cloud_density = remap(base_noise * height_coverage, 1.0 - coverage, 1.0) * coverage
+    Cloud_density = rescale(Cloud_density，highfreq_noise)
+    Cloud_density = rescale(Cloud_density，highhighfreq_noise)
     
     Important is <Remap idea>, and Remap(value, lower, upper, 0, 1) equal Rescale(value, lower, upper)
     I recommented first use noise and customized-image in 2D-Render
@@ -56,56 +60,56 @@ Probability: { 0 <= x <= 1 }
     Cloud_density = rescale(Volume_Container_density，noise)
     Cloud_density = rescale(Cloud_density，highfreq_noise)
     Cloud_density = rescale(Cloud_density，highhighfreq_noise)
-    from www.shadertoy.com/view/WscyWB, His great work
+    from "https://www.shadertoy.com/view/WscyWB", His great work
     
 3. Raymarch
-   3.1 Equal-Length-Raymarch
-       Length ds = Constant;
-       for(int i = 0; i != step; ++i){
-          Length s = i * ds;
-          ...
-       }
+  3.1 Equal-Length-Raymarch
+    Length ds = Constant;
+    for(int i = 0; i != step; ++i){
+      Length s = i * ds;
+      ...
+    }
        
-       Simple method, by increment ds can avoid fault
+    Simple method, by increment ds can avoid fault
        
-   3.2 Detail-Raymarch
-       Length step_length = Constant;
-       Length detail_length = small_length;
-       bool State = Normal;
-       for(int i = 0; i != step; ++i){
-          if(State == Detail){
-             ...
-             Length ds = detail_length;
-          } else {
-             Length ds = step_length;
-             ...
-             if(...){
-                State = Detail;
-             }
-          }
-       }
+  3.2 Detail-Raymarch
+    Length step_length = Constant;
+    Length detail_length = small_length;
+    bool State = Normal;
+    for(int i = 0; i != step; ++i){
+      if(State == Detail){
+        ...
+        Length ds = detail_length;
+      } else {
+        Length ds = step_length;
+        ...
+        if(...){
+          State = Detail;
+        }
+      }
+    }
        
-       More detail results
+    More detail results
    
-   3.3 Empty-Space-Raymarch
-       Length init_step_length = setup(detail_length, n);
-       for(int i = 0; i != step; ++i){
-           Length ds = pow(0.5,n)*init_step_length;
-           ...
-       }
+  3.3 Empty-Space-Raymarch
+    Length init_step_length = setup(detail_length, n);
+    for(int i = 0; i != step; ++i){
+      Length ds = pow(0.5,n)*init_step_length;
+      ...
+    }
       
-       Close camera Objects must are very large and continuous
+    Close camera Objects must are very large and continuous
    
-   3.4 Structed-Raymarch
-       setup(t, dt, wt);
-       for(int i = 0; i != step; ++i){
-          ds = wt*dt;
+  3.4 Structed-Raymarch
+    setup(t, dt, wt);
+    for(int i = 0; i != step; ++i){
+      ds = wt*dt;
           
-          ...
-          t += dt; // cannot use i * dt
-       }
+      ...
+      t += dt; // cannot use i * dt
+    }
        
-       Avoid fault
+    Avoid fault
        
        
 I believe you don't need to look at Source after reading this README

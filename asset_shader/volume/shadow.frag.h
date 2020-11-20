@@ -17,7 +17,7 @@ uniform sampler2D cloud_curl_texture;
 uniform float transmit_determinant = 0.01;
 uniform float cloud_forward_scattering = 0.80f;
 uniform float cloud_backward_scattering = 0.45f;
-uniform CloudProfile CLOUDSPHERE0 = CloudProfile(1000.0, 4000.0, 0.1);
+uniform CloudProfile CLOUDSPHERE0 = CloudProfile(3000.0, 5000.0, 0.1);
 // sky property
 uniform vec3 sun_vector;
 // scene property
@@ -30,12 +30,17 @@ out float out_transmittance;
 
 
 Number GetVolumesDensity(Position point, Position earth_center) {
+	vec3 curl = vec3(0.0);
+	curl.xy += texture(cloud_curl_texture, point.xy * base_cloud_texture_scale).xy;
+	curl.xz += texture(cloud_curl_texture, point.xz * base_cloud_texture_scale).xz;
+	curl = curl * 2.0 - 1.0;
+
 	Number percipitation1;
-	Number density = GetCloudDensity(CLOUDSPHERE0, base_cloud_texture, cloud_detail_texture, base_cloud_texture_scale, 8.0, 0.2, 2.0, vec3(1, 0, 0) * time, 2,
+	Number density = GetCloudDensity(CLOUDSPHERE0, base_cloud_texture, cloud_detail_texture, base_cloud_texture_scale, 4.0, 0.1, 40.0, vec3(1, 0, 0) * time, 1,
 		cloud_weather_texture_first, cloud_weahter_texture_scale, cloud_height_texture, point, earth_center, percipitation1);
 
 	Number percipitation2;
-	density += GetCloudDensity(CLOUDSPHERE0, base_cloud_texture, cloud_detail_texture, base_cloud_texture_scale, 8.0, 0.2, 2.0, vec3(1, 0, 0) * time, 2,
+	density += GetCloudDensity(CloudProfile(1000, 4000, 0.1), base_cloud_texture, cloud_detail_texture, base_cloud_texture_scale, 4.0, 0.1, 20.0, vec3(1, 0, 0) * time, 1,
 		cloud_weather_texture_second, cloud_weahter_texture_scale, cloud_height_texture, point, earth_center, percipitation2);
 
 	return density;
@@ -65,7 +70,7 @@ void main() {
 		Number   density = GetVolumesDensity(point, earth_center);
 		transmittance   *= exp(-density * ds);
 		
-		if (!intersect && transmittance < 0.9) {
+		if (!intersect && density != 0.0) {
 			intersect_point = point;
 			intersect = true;
 		}

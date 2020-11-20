@@ -148,15 +148,19 @@ namespace calculation {
 
 
 	template<typename point_t, typename vector_t, typename length_t>
-	length_t ray_intersect_sphere(point_t r_origin, vector_t r_direction, point_t sph_center, length_t sph_radius) {
-		vector_t center_to_origin = (r_origin - sph_center);
-		length_t lowest_distance, max_distance;
-		bool intersect = quadratic_accurate(dot(r_direction, r_direction), 
-										    dot(center_to_origin, r_direction) * static_cast<length_t>(2),
-										    dot(center_to_origin, center_to_origin) - sph_radius*sph_radius,
-										    lowest_distance, max_distance);
+	length_t ray_intersect_sphere(point_t ray_origin, vector_t ray_direction, point_t sph_center, length_t sph_radius) {
+		vector_t center_to_origin = (ray_origin - sph_center);
+		length_t lowest_distance, 
+				 max_distance;
+		bool intersect = quadratic_accurate(
+			dot(ray_direction, ray_direction),
+			dot(center_to_origin, ray_direction) * static_cast<length_t>(2),
+			dot(center_to_origin, center_to_origin) - sph_radius*sph_radius,
+			lowest_distance, max_distance
+		);
+
 		return intersect ? min(max(lowest_distance, static_cast<length_t>(0)), max_distance) : std::numeric_limits<length_t>::quiet_NaN();
-		/*<idea> length_sqrare((r_origin + r_direction * t) - sph_center) = sph_radius * sph_radius : x*x + y*y + z*z = R*R
+		/*<idea> length_sqrare((ray_origin + ray_direction * t) - sph_center) = sph_radius * sph_radius : x*x + y*y + z*z = R*R
 			dot((O+D*t) - C, (O+D*t) - C) = R * R
 			   dot(O-C + D*t, O-C + D*t)  = R * R
 			dot(O-C,O-C) + dot(D*t,D*t) + 2*(O-C)*(D*t) = R * R
@@ -166,59 +170,56 @@ namespace calculation {
 	}
 
 	template<typename point_t, typename vector_t, typename length_t>
-	length_t ray_intersect_sphsurf(point_t r_origin, vector_t r_direction, point_t sph_center, length_t sph_radius) {
-		vector_t center_to_origin = (r_origin - sph_center);
-		length_t lowest_distance, max_distance;
-		bool intersect = quadratic_accurate(dot(r_direction, r_direction), 
-										    dot(center_to_origin, r_direction) * static_cast<length_t>(2),
-											dot(center_to_origin, center_to_origin) - sph_radius*sph_radius, 
-											lowest_distance, max_distance);
+	length_t ray_intersect_sphere_surface(point_t ray_origin, vector_t ray_direction, point_t sph_center, length_t sph_radius) {
+		vector_t center_to_origin = (ray_origin - sph_center);
+		length_t lowest_distance, 
+				 max_distance;
+		bool intersect = quadratic_accurate(
+			dot(ray_direction, ray_direction), 
+			dot(center_to_origin, ray_direction) * static_cast<length_t>(2),
+			dot(center_to_origin, center_to_origin) - sph_radius*sph_radius, 
+			lowest_distance, max_distance
+		);
+
 		return intersect ? (lowest_distance >= static_cast<length_t>(0) ? lowest_distance : max_distance) : std::numeric_limits<length_t>::quiet_NaN();
 	}
 
-	template<typename result_t/*noAuto*/, typename point_t, typename vector_t>
-	result_t ray_intersect_aabb(point_t r_origin, vector_t r_direction, point_t bx_min, point_t bx_max) {
-		vector_t test_lowside  = (bx_min - r_origin) / r_direction;
-		vector_t test_highside = (bx_max - r_origin) / r_direction;
+	template<typename point_t, typename vector_t, typename length_t = decltype(point_t()[0] - point_t()[0])>
+	length_t ray_intersect_aabox(point_t ray_origin, vector_t ray_direction, point_t box_min, point_t box_max) {
+		vector_t test_lowside  = (box_min - ray_origin) / ray_direction;
+		vector_t test_highside = (box_max - ray_origin) / ray_direction;
+				 test_lowside  = cast_nan(test_lowside, std::numeric_limits<length_t>::lowest());
+				 test_highside = cast_nan(test_highside, std::numeric_limits<length_t>::max());
 
-		result_t t0        = std::numeric_limits<result_t>::lowest();
-		result_t t1        = std::numeric_limits<result_t>::max();
-		bool     intersect = true;
-		for (size_t i = 0; i != 3 && intersect; ++i) {
-			result_t new_t0 = static_cast<result_t>(test_lowside[i]);
-			result_t new_t1 = static_cast<result_t>(test_highside[i]);
-			if (new_t0 <= new_t1) {
-				t0 = max(t0, new_t0);
-				t1 = min(t1, new_t1);
-			} else {
-				t0 = max(t0, new_t1);
-				t1 = min(t1, new_t0);
-			}
+		vector_t lowest_distances = min(test_lowside, test_highside);
+		vector_t max_distances    = max(test_lowside, test_highside);
+		length_t lowest_distance  = max(lowest_distances[0], max(lowest_distances[1], lowest_distances[2]));
+		length_t max_distance     = min(max_distances[0], min(max_distances[1], max_distances[2]));
+		bool intersect = lowest_distance <= max_distance;
 
-			intersect &= (!(t0 > t1));
-		}
-
-		result_t Zero = static_cast<result_t>(0);
-		return (intersect && (t0 >= Zero || t1 >= Zero)) ? max(min(t0, t1), Zero) : std::numeric_limits<result_t>::quiet_NaN();
+		return intersect ? min( max(lowest_distance, static_cast<length_t>(0)), max_distance )
+			: std::numeric_limits<length_t>::quiet_NaN();	
 		/*<idea> t = (d - dot(N,O))/dot(N,D) 
 				 t = (d - O[i])/D[i]  : axis aligned normal
 				 and IEEE754-floating-div-ZERO is "inf", unsupport integer vector
+				 and IEEE754-floating_Zero-div-Zero is "nan"
 		</idea>*/
 	}
 	
-	template<typename result_t/*noAuto*/, typename point_t, typename vector_t, typename length_t>
-	result_t ray_intersect_plane(point_t r_origin, vector_t r_direction, vector_t pl_normal, length_t pl_distance) {
-		return static_cast<result_t>( (pl_distance - dot(pl_normal, r_origin)) / dot(pl_normal, r_direction) );
-		/*<idea> dot(pl_normal, r_origin+r_direction*t) = pl_distance
+	template<typename point_t, typename vector_t, typename length_t>
+	length_t ray_intersect_plane(point_t ray_origin, vector_t ray_direction, vector_t pl_normal, length_t pl_distance) {
+		return (pl_distance - dot(pl_normal, ray_origin)) / dot(pl_normal, ray_direction);
+		/*<idea> dot(pl_normal, ray_origin+ray_direction*t) = pl_distance
 			      dot(N, O + D*t) = d
 			dot(N,O) + dot(N,D*t) = d      : distributive law
 			dot(N,O) + dot(N,D)*t = d      : scalar-product scalar law
 			t = (d - dot(N,O))/dot(N,D)
 		</idea>*/
 	}
-	
+
+
 	template<typename point_t>
-	bool aabb_test_aabb(point_t left_min, point_t left_max, point_t right_min, point_t right_max) {
+	bool aabox_test_aabox(point_t left_min, point_t left_max, point_t right_min, point_t right_max) {
 		if (left_max[0] < right_min[0] || left_min[0] > right_min[0]) { return false; }
 		if (left_max[1] < right_min[1] || left_min[1] > right_min[1]) { return false; }
 		if (left_max[2] < right_min[2] || left_min[2] > right_min[2]) { return false; }
@@ -234,13 +235,13 @@ namespace calculation {
 	}
 	
 	template<typename point_t, typename vector_t, typename length_t>
-	bool ray_test_sphere(point_t r_origin, vector_t r_direction, point_t sph_center, length_t sph_radius) {
-		vector_t center_to_origin = r_origin - sph_center;
+	bool ray_test_sphere(point_t ray_origin, vector_t ray_direction, point_t sph_center, length_t sph_radius) {
+		vector_t center_to_origin = ray_origin - sph_center;
 
 		length_t c = dot(center_to_origin, center_to_origin) - sph_radius * sph_radius;
 		if (c <= static_cast<length_t>(0)) { return true; }
 		
-		length_t b = dot(center_to_origin, r_direction);
+		length_t b = dot(center_to_origin, ray_direction);
 		if (b >= static_cast<length_t>(0)) { return false; }
 		
 		length_t disc = b * b - c;
@@ -251,8 +252,25 @@ namespace calculation {
 
 	template<typename point_t, typename vector_t, typename length_t> inline
 	bool ray_test_plane(point_t r_origin, vector_t r_direction, vector_t pl_normal, length_t pl_distance) {
-		return ray_intersect_plane<length_t>(r_origin, r_direction, pl_normal, pl_distance) >= static_cast<length_t>(0);
+		return (pl_distance - dot(pl_normal, r_origin)) / dot(pl_normal, r_direction) >= static_cast<length_t>(0);
 	}
+
+	template<typename point_t, typename length_t>
+	bool aabox_test_sphere(point_t box_min, point_t box_max, point_t sph_center, length_t sph_radius) {
+		using area_t = decltype( dot(sph_center - box_max, sph_center - box_max) );
+
+		point_t closest_point = clamp(sph_center, box_min, box_max);
+		area_t square_distance = dot(closest_point - sph_center, closest_point - sph_center);
+		return square_distance <= (sph_radius * sph_radius);
+	}
+
+
+	template<typename point_t>
+	point_t closest_point_aabox(point_t the_point, point_t box_min, point_t box_max) {
+		point_t closest_point = clamp(the_point, box_min, box_max);
+		return closest_point;
+	}
+
 
 	template<typename result_t, ray ray_t, plane plane_t> inline
 	result_t ray_intersect_plane(ray_t r, plane_t pl) {
@@ -264,20 +282,6 @@ namespace calculation {
 		return ray_test_plane(r.origin, r.direction, pl.normal, pl.distance);
 	}
 
-	template<typename point_t>
-	point_t closest_point_AABB(point_t the_point, point_t b_min, point_t b_max) {
-		point_t closest_point = clamp(the_point, b_min, b_max);
-		return closest_point;
-	}
-
-	template<typename point_t, typename length_t>
-	bool AABB_test_sphere(point_t b_min, point_t b_max, point_t sph_center, length_t sph_radius) {
-		using area_t = decltype( dot(sph_center - b_max, sph_center - b_max) );
-
-		point_t closest_point = closest_point_AABB(sph_center, b_min, b_max);
-		area_t square_distance = dot(closest_point - sph_center, closest_point - sph_center);
-		return square_distance <= (sph_radius * sph_radius);
-	}
 
 
 	
@@ -348,10 +352,10 @@ namespace calculation {
 	//}
 
 	//template<typename point_t, typename vector_t> inline
-	//test_state test_ray_AABB(point_t r_origin, vector_t r_direction, point_t bx_min, point_t bx_max) {
+	//test_state test_ray_AABB(point_t ray_origin, vector_t ray_direction, point_t bx_min, point_t bx_max) {
 	//	using real_t = decltype(bx_max[0] - bx_min[0]);
 	//	real_t unuse;
-	//	return intersect_ray_AABB(r_origin, r_direction, bx_min, bx_max, unuse);
+	//	return intersect_ray_AABB(ray_origin, ray_direction, bx_min, bx_max, unuse);
 	//}
 
 	//template<ray ray_t, AABB AABB_t> inline

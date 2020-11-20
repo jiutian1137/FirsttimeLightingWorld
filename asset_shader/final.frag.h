@@ -14,6 +14,7 @@ uniform mat4 proj_to_world;
 
 uniform sampler2D scene_shadow_texture;
 uniform sampler2D volume_shadow_texture;
+uniform sampler2D volume_shadow_transmittance_texture;
 uniform mat4 world_to_sunproj;
 
 //https://knarkowicz.wordpress.com/2016/01/06/aces-filmic-tone-mapping-curve/
@@ -96,7 +97,12 @@ Length IntegrateShadowLength(vec3 ray_start, vec3 ray_end) {
 		bool scene_shadowed  = (point.z - 3e-5) > texture(scene_shadow_texture, point.xy).r;
 		bool volume_shadowed = (point.z - 3e-5) > texture(volume_shadow_texture, point.xy).r;
 
-		shadow_length += (scene_shadowed ? float(scene_shadowed) : float(volume_shadowed));
+		shadow_length += (scene_shadowed ? 
+			float(scene_shadowed) : 
+			(volume_shadowed ? 
+				1.0 - texture(volume_shadow_transmittance_texture, point.xy).r :
+				0.0)
+			);
 	}
 
 	return shadow_length * (length(ray_end - ray_start) / step);

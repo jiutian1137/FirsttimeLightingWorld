@@ -356,6 +356,11 @@ namespace calculation{
 			return *this;
 		}
 
+		friend vector operator/(real _Left, vector _This) {
+			return calculate(_This, [_Left](real _Right) {
+				return _Left / _Right; });
+		}
+
 		scalar_type _Mydata[_Size];
 	};
 
@@ -366,6 +371,29 @@ namespace calculation{
 	template<typename _Ty, typename _Traits = block_traits<_Ty>>
 	using vector4 = vector<_Ty, 4, _Traits>;
 
+	template<typename T, size_t N> inline
+	vector<T,N> isnan(vector<T,N> vectorA) {
+		return vector<T,N>::calculate(vectorA, [](T scalarA) { 
+			return scalarA != scalarA; });
+	}
+
+	template<typename T, size_t N> inline
+	vector<T,N> isinf(vector<T,N> vectorA) {
+		return vector<T,N>::calculate(vectorA, [](T scalarA) { 
+			return isinf(scalarA); });
+	}
+
+	template<typename T, size_t N> inline
+	vector<T, N> cast_nan(vector<T,N> vectorA, vector<T,N> cast_vector) {
+		return vector<T,N>::calculate(vectorA, cast_vector, [](T scalarA, T cast_scalar) {
+			return isnan(scalarA) ? cast_scalar : scalarA; });
+	}
+
+	template<typename T, size_t N> inline
+	vector<T, N> cast_nan(vector<T,N> vectorA, T cast_scalar) {
+		return vector<T,N>::calculate(vectorA, [cast_scalar](T scalarA) {
+			return isnan(scalarA) ? cast_scalar : scalarA; });
+	}
 
 	template<typename T, size_t N> inline
 	vector<T,N> min(vector<T,N> vectorA, vector<T,N> vectorB) {
