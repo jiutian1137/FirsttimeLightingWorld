@@ -2,7 +2,7 @@
 <Dream World 1, Volumetric Cloud>
 Free-License
 
-![image](asset_result/temp.png)
+![image](https://github.com/jiutian1137/dreamworld1/blob/master/asset_result/temp.png)
 ![image](asset_result/temp2.png)
 ![image](asset_result/temp3.png)
 
