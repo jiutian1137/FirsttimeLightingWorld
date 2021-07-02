@@ -7,6 +7,19 @@ Free-License
 ![image](asset_result/temp3.png)
 
 
+Sky,          50%
+ShallowWater, 0%
+Plant,        0%
+Wind,         0%
+
+......
+.....
+...
+..
+.
+
+
+
 Teams:
 Probability: { 0 <= x <= 1 }
 
@@ -16,30 +29,7 @@ Probability: { 0 <= x <= 1 }
       Indirect_radiance = Indirect_radiance * Indirect_energy * Indirect_visivility;
       Integrate(camera to endPoint){ transmittance(camera to thePoint) * (Direct_radiance + Indirect_radiance) * (- absorption - outscattering + inscattering) * phase(theta) * ds }
   
-  1.2 Volume's Integrated Lighting Energy (Probability)
-      Beer's law or Andrew Schneider's powdersugar
-  
-  1.3 Direct Radiance and Indirect Radiance
-      Precompute Atmosphere Scattering
-      
-  1.4 We need to Consider all important participating media
-      ForExample: Atmosphere Cloudsphere Fogsphere Scene ...
-      
-      1.4.1 Scene:
-          Light cannot pass through it
-          use approximated-geometry-render-method(Lambert-diffuse, Microfacet-specul, ...)
-      
-      1.4.2 Atmosphere Cloudsphere Fogsphere:
-          Light can pass through it
-          use Volume-render-method(Raymarhc-integrate, Eric-Bruneton's Precomputed LookupTable(Must be continuous media, and static))
  
-  Reference
-    (c) Eric Bruneton Atmosphere Scattering Sky Model 
-    URL: "https://github.com/ebruneton/precomputed_atmospheric_scattering"
-    License: "BSP-3"
-    (c) GPUPro5 GPUPro6 GPUPro7 ...
-    (c) SIG2015 SIG2017 SIG2019 Advances in Real-Time Render ...
-
 2. Cloud Shape
   2.1 Schneider's Cloud-Model
     Shape = Function(coverage, height_coverage, details)
